@@ -52,7 +52,7 @@ export const SignUpForm = () => {
           </div>
         </div>
 
-        {/* First-name & Last-name */}
+        {/* Email & City */}
         <div className="flex gap-3">
           <div className="space-y-3 w-full">
             <Label htmlFor="email" className="text-gray-700">
@@ -125,7 +125,7 @@ export const SignUpForm = () => {
               Contact Number
             </Label>
             <Input
-              placeholder="Enter your Age"
+              placeholder="Enter your Contact Number"
               id="contact-number"
               className="h-10"
               type="number"
@@ -158,7 +158,7 @@ export const SignUpForm = () => {
                   className="w-full justify-start font-normal cursor-pointer h-10"
                 >
                   <CalendarIcon className="mr-2 h-4 w-4" />
-                  Select Birth Date
+                  Select Your Birth Date
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0" align="start">
@@ -181,7 +181,7 @@ export const SignUpForm = () => {
           </div>
         </div>
 
-        {/* <div className="flex"> */}
+        {/* Confirm Password */}
         <div className="w-1/2 pr-2 space-y-3">
           <Label htmlFor="confirm-password" className="text-gray-700">
             Confirm Password

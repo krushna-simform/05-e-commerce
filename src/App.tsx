@@ -1,7 +1,11 @@
+import { Button } from "@/components/ui/button";
+
 function App() {
   return (
     <>
-      <h1 className="text-red-700">ClickCart</h1>
+      <Button className="bg-amber-300 hover:bg-amber-300/80 cursor-pointer text-black">
+        ClickCart
+      </Button>
     </>
   );
 }

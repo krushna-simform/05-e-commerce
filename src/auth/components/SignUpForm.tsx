@@ -162,7 +162,7 @@ export const SignUpForm = () => {
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0" align="start">
-                <Calendar mode="single" initialFocus fromDate={new Date()} />
+                <Calendar mode="single" initialFocus />
               </PopoverContent>
             </Popover>
           </div>

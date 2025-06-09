@@ -24,7 +24,7 @@ export const SignUpForm = () => {
   return (
     <div className="flex h-full items-center justify-center">
       <div className="flex flex-col w-180 gap-6">
-        <p className="text-4xl font-medium my-8" role="heading">
+        <p className="text-4xl font-medium my-8 text-center" role="heading">
           Create an account
         </p>
 

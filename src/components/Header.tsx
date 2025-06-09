@@ -15,13 +15,13 @@ import {
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState<SupabaseUser>(null);
+  const [userData, setUserData] = useState<SupabaseUser>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const { data } = await supabase.auth.getUser();
-        setData(data.user);
+        setUserData(data.user);
       } catch (error) {
         alert("Something went wrong");
         console.error(error);
@@ -48,7 +48,7 @@ export const Header = () => {
           </PopoverTrigger>
           <PopoverContent className="min-w-sm border-none flex flex-col items-center gap-2 mt-6">
             <p className="bg-gray-100 py-2 px-4 font-medium text-center rounded-sm">
-              {data?.email}
+              {userData?.email}
             </p>
             <Button
               className="w-20 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white cursor-pointer"

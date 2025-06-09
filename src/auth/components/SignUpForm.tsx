@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { CalendarIcon } from "lucide-react";
 import { useFormik } from "formik";
 import { format } from "date-fns";
@@ -27,6 +27,7 @@ import { Calendar } from "@/components/ui/calendar";
 export const SignUpForm = () => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(undefined);
+  const navigate = useNavigate();
 
   const formik = useFormik<User>({
     initialValues: {
@@ -60,6 +61,8 @@ export const SignUpForm = () => {
           alert("An error occurred during signup. Please try again.");
         } else {
           alert("Account created successfully!");
+          await supabase.auth.signOut();
+          navigate("/sign-in");
         }
       } catch (error) {
         alert("An error occurred during signup. Please try again.");

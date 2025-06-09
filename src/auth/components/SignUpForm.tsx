@@ -25,7 +25,10 @@ export const SignUpForm = () => {
     <div className="flex h-full items-center justify-center">
       <div className="flex flex-col w-180 gap-6">
         <p className="text-4xl font-medium my-8 text-center" role="heading">
-          Create an account
+          Create an account in{" "}
+          <span className="font-medium bg-gradient-to-r from-[#0792dd] to-indigo-600 bg-clip-text text-transparent">
+            ClickCart
+          </span>
         </p>
 
         {/* First-name & Last-name */}

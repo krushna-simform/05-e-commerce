@@ -8,6 +8,7 @@ import SignUp from "@/auth/pages/SignUp";
 import PrivateRoute from "@/auth/components/PrivateRoute";
 import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
+import PageNotFound from "@/pages/NotFound";
 
 function App() {
   const [session, setSession] = useState<SupabaseSession>(null);
@@ -49,6 +50,7 @@ function App() {
       path: "/sign-up",
       element: !session ? <SignUp /> : <Navigate to="/" />,
     },
+    { path: "*", element: <PageNotFound /> },
   ]);
 
   return <RouterProvider router={router} />;

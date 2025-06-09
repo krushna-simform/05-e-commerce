@@ -7,7 +7,7 @@ export const SignInForm = () => {
   return (
     <div className="flex h-full items-center justify-center">
       <div className="flex flex-col w-100 gap-6">
-        <p className="text-4xl font-medium my-8" role="heading">
+        <p className="text-4xl text-center font-medium my-8" role="heading">
           Login to your account
         </p>
         <div className="space-y-6">

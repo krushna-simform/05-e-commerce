@@ -1,4 +1,3 @@
-// src/auth/components/PrivateRoute.tsx
 import type { JSX } from "react";
 import { Navigate } from "react-router";
 import type { SupabaseSession } from "@/types/supabase.type";

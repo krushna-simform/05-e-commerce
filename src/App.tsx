@@ -1,11 +1,23 @@
-import { Button } from "@/components/ui/button";
+import { createBrowserRouter, RouterProvider } from "react-router";
+
+import SignIn from "@/auth/pages/SignIn";
+import SignUp from "./auth/pages/SignUp";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <SignIn />,
+  },
+  {
+    path: "sign-up",
+    element: <SignUp />,
+  },
+]);
 
 function App() {
   return (
     <>
-      <Button className="bg-amber-300 hover:bg-amber-300/80 cursor-pointer text-black">
-        ClickCart
-      </Button>
+      <RouterProvider router={router} />
     </>
   );
 }

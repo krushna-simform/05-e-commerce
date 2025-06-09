@@ -59,9 +59,7 @@ export const SignUpForm = () => {
         if (error) {
           alert("An error occurred during signup. Please try again.");
         } else {
-          alert(
-            "Account created successfully! Please check your email for verification."
-          );
+          alert("Account created successfully!");
         }
       } catch (error) {
         alert("An error occurred during signup. Please try again.");

@@ -86,7 +86,7 @@ export const SignUpForm = () => {
           <div className="flex gap-3">
             <div className="space-y-3 w-full">
               <Label htmlFor="firstName" className="text-gray-700">
-                First Name
+                First Name <span className="text-red-700">*</span>
               </Label>
               <Input
                 name="firstName"
@@ -105,7 +105,7 @@ export const SignUpForm = () => {
             </div>
             <div className="space-y-3 w-full">
               <Label htmlFor="lastName" className="text-gray-700">
-                Last Name
+                Last Name <span className="text-red-700">*</span>
               </Label>
               <Input
                 name="lastName"
@@ -126,7 +126,7 @@ export const SignUpForm = () => {
           <div className="flex gap-3">
             <div className="space-y-3 w-full">
               <Label htmlFor="email" className="text-gray-700">
-                Email
+                Email <span className="text-red-700">*</span>
               </Label>
               <Input
                 name="email"
@@ -177,7 +177,7 @@ export const SignUpForm = () => {
           <div className="flex gap-3">
             <div className="space-y-3 w-full">
               <Label htmlFor="age" className="text-gray-700">
-                Age
+                Age <span className="text-red-700">*</span>
               </Label>
               <Input
                 name="age"
@@ -195,7 +195,7 @@ export const SignUpForm = () => {
             </div>
             <div className="space-y-3 w-full">
               <Label htmlFor="gender" className="text-gray-700">
-                Gender
+                Gender <span className="text-red-700">*</span>
               </Label>
               <Select
                 name="gender"
@@ -223,7 +223,7 @@ export const SignUpForm = () => {
           <div className="flex gap-3">
             <div className="space-y-3 w-full">
               <Label htmlFor="contactNumber" className="text-gray-700">
-                Contact Number
+                Contact Number <span className="text-red-700">*</span>
               </Label>
               <Input
                 name="contactNumber"
@@ -287,7 +287,7 @@ export const SignUpForm = () => {
             <div className="space-y-3 w-full">
               <div className="grid w-full max-w-sm items-center gap-3">
                 <Label htmlFor="password" className="text-gray-700">
-                  Password
+                  Password <span className="text-red-700">*</span>
                 </Label>
                 <Input
                   name="password"
@@ -311,7 +311,7 @@ export const SignUpForm = () => {
           {/* Confirm Password */}
           <div className="w-1/2 pr-2 space-y-3">
             <Label htmlFor="confirmPassword" className="text-gray-700">
-              Confirm Password
+              Confirm Password <span className="text-red-700">*</span>
             </Label>
             <Input
               name="confirmPassword"

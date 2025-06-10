@@ -315,7 +315,7 @@ export const SignUpForm = () => {
             </Label>
             <Input
               name="confirmPassword"
-              placeholder="confirmPassword"
+              placeholder="Confirm Password"
               id="confirm-password"
               type="password"
               className="h-10 text-gray-700 cursor-pointer"

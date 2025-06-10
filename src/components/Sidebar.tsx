@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import type { SortOption } from "@/types/sort.type";
 
 const sortOptionLabels: Record<string, string> = {
-  none: "No Sorting",
+  none: "Sort",
   "name-asc": "Name: A to Z",
   "name-desc": "Name: Z to A",
   "price-asc": "Price: Low to High",

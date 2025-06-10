@@ -3,13 +3,13 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
 import type { SupabaseSession } from "@/types/supabase.type";
 import { supabase } from "@/supabase-client";
+import { SortProvider } from "@/context/SortContext";
 import SignIn from "@/auth/pages/SignIn";
 import SignUp from "@/auth/pages/SignUp";
 import PrivateRoute from "@/auth/components/PrivateRoute";
 import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
 import PageNotFound from "@/pages/NotFound";
-import { SortProvider } from "./context/SortContext";
 
 function App() {
   const [session, setSession] = useState<SupabaseSession>(null);

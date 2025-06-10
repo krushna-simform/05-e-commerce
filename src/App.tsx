@@ -9,6 +9,7 @@ import PrivateRoute from "@/auth/components/PrivateRoute";
 import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
 import PageNotFound from "@/pages/NotFound";
+import { SortProvider } from "./context/SortContext";
 
 function App() {
   const [session, setSession] = useState<SupabaseSession>(null);
@@ -53,7 +54,11 @@ function App() {
     { path: "*", element: <PageNotFound /> },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <SortProvider>
+      <RouterProvider router={router} />;
+    </SortProvider>
+  );
 }
 
 export default App;

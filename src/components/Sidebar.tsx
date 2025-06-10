@@ -21,7 +21,7 @@ export const Sidebar = () => {
   const { sortOption, setSortOption } = useSort();
 
   return (
-    <div className="w-65 flex flex-col items-center fixed left-0 top-0 h-full mt-17 pt-10 ">
+    <div className="w-65 md:flex flex-col items-center fixed left-0 top-0 h-full mt-17 pt-10 hidden">
       <h2 className="text-lg font-semibold mb-2">Sort By</h2>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

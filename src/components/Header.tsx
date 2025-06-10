@@ -39,7 +39,10 @@ export const Header = () => {
         </p>
       </Link>
       <div className="flex items-center gap-4">
-        <Input placeholder="Search Products" className="h-12 w-sm" />
+        <Input
+          placeholder="Search Products"
+          className="h-12 w-sm hidden md:flex"
+        />
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger>
             <Button className="rounded-full h-11 w-11 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 cursor-pointer">

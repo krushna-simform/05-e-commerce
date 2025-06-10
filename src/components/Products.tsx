@@ -6,7 +6,7 @@ export const Products = ({ product }: { product: Array<Product> }) => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-1 ml-65 px-10 mt-12 pt-12 shadow-lg min-h-[80vh]">
+      <div className="flex-1 md:ml-65 px-10 mt-12 pt-12 shadow-lg min-h-[80vh]">
         <div className="flex items-center gap-4">
           <div className="bg-gradient-to-r from-blue-600 to-indigo-600 h-10 w-5 rounded-l-sm"></div>
           <p

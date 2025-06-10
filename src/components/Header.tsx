@@ -45,7 +45,10 @@ export const Header = () => {
         />
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger>
-            <Button className="rounded-full h-11 w-11 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 cursor-pointer">
+            <Button
+              className="rounded-full h-11 w-11 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 cursor-pointer"
+              aria-label="User"
+            >
               <User className="text-white !h-5 !w-5" />
             </Button>
           </PopoverTrigger>

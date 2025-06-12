@@ -4,6 +4,8 @@ import clickCartIcon from "/icons/logo.png";
 
 import type { SupabaseUser } from "@/types/supabase.type";
 import { supabase } from "@/supabase-client";
+import { useSearch } from "@/hooks/useSearch";
+import { useDebounce } from "@/hooks/useDebounce";
 import { Input } from "@/components/ui/input";
 import { User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,6 +19,14 @@ export const Header = forwardRef<HTMLInputElement>((_, ref) => {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState<SupabaseUser>(null);
   const location = useLocation();
+
+  const { setSearchTerm } = useSearch();
+  const [input, setInput] = useState("");
+  const debouncedValue = useDebounce(input, 300);
+
+  useEffect(() => {
+    setSearchTerm(debouncedValue);
+  }, [debouncedValue, setSearchTerm]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -45,6 +55,8 @@ export const Header = forwardRef<HTMLInputElement>((_, ref) => {
             ref={ref}
             placeholder="Search Products"
             className="h-12 w-sm"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
           />
         )}
         <Popover open={open} onOpenChange={setOpen}>

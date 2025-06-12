@@ -39,7 +39,7 @@ export const Sidebar = () => {
 
       <div
         className={cn(
-          "md:flex flex-col items-center fixed left-0 top-0 h-full mt-[69px] pt-20 md:pt-10 z-40 bg-white transition-transform duration-300",
+          "md:flex flex-col items-center fixed left-0 top-0 h-full md:h-1/2 mt-[69px] pt-20 md:pt-10 z-40 bg-white transition-transform duration-300",
           {
             "transform-none w-50 md:border-none border": isSidebarOpen,
             "transform -translate-x-full w-50": !isSidebarOpen,

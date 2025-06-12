@@ -1,3 +1,4 @@
+import { forwardRef, useEffect, useState } from "react";
 import { Link } from "react-router";
 import clickCartIcon from "/icons/logo.png";
 
@@ -6,14 +7,13 @@ import { supabase } from "@/supabase-client";
 import { Input } from "@/components/ui/input";
 import { User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export const Header = () => {
+export const Header = forwardRef<HTMLInputElement>((props, ref) => {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState<SupabaseUser>(null);
 
@@ -40,6 +40,7 @@ export const Header = () => {
       </Link>
       <div className="flex items-center gap-4">
         <Input
+          ref={ref}
           placeholder="Search Products"
           className="h-12 md:w-sm w-45 md:flex"
         />
@@ -69,4 +70,4 @@ export const Header = () => {
       </div>
     </header>
   );
-};
+});

@@ -56,7 +56,7 @@ function App() {
 
   return (
     <SortProvider>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </SortProvider>
   );
 }

@@ -1,3 +1,4 @@
+import { useLocation } from "react-router";
 import { Button } from "@/components/ui/button";
 import sampleQR from "/icons/qr.svg";
 import googlePlayLogo from "/icons/google_play.svg";
@@ -12,6 +13,7 @@ interface FooterProp {
 }
 
 export function Footer({ focusOnSearch }: FooterProp) {
+  const location = useLocation();
   return (
     <footer className="w-full bg-blue-700/90 text-white px-4 py-20">
       <div className="w-full mx-auto flex justify-center items-start gap-20 flex-wrap">
@@ -19,13 +21,15 @@ export function Footer({ focusOnSearch }: FooterProp) {
           <p className="text-2xl font-semibold" role="heading">
             ECommerce
           </p>
-          <Button
-            onClick={focusOnSearch}
-            variant="link"
-            className="text-white text-lg cursor-pointer"
-          >
-            Focus on search
-          </Button>
+          {location.pathname == "/" && (
+            <Button
+              onClick={focusOnSearch}
+              variant="link"
+              className="text-white text-lg cursor-pointer"
+            >
+              Focus on search
+            </Button>
+          )}
           <div className="flex flex-col gap-4">
             <p>Subscribe</p>
             <p>Get 10% off your first order</p>

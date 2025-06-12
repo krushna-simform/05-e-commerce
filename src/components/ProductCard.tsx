@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import type { Product } from "@/types/product.type";
 import { Button } from "@/components/ui/button";
 import { Rating } from "@/components/ui/Rating";
@@ -7,8 +8,17 @@ export const ProductCard = ({
 }: {
   product: Pick<Product, "thumbnail" | "title" | "price" | "rating" | "id">;
 }) => {
+  const navigate = useNavigate();
+
+  const cardClickHandler = () => {
+    navigate(`/product/${product.id}`);
+  };
+
   return (
-    <div className="group bg-white rounded-lg shadow border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300 cursor-pointer">
+    <div
+      onClick={cardClickHandler}
+      className="group bg-white rounded-lg shadow border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300 cursor-pointer"
+    >
       <div className="relative pt-[100%] bg-gray-50">
         <img
           loading="lazy"

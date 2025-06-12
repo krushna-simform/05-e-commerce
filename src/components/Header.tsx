@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import clickCartIcon from "/icons/logo.png";
 
 import type { SupabaseUser } from "@/types/supabase.type";
@@ -16,6 +16,7 @@ import {
 export const Header = forwardRef<HTMLInputElement>((_, ref) => {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState<SupabaseUser>(null);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -39,11 +40,13 @@ export const Header = forwardRef<HTMLInputElement>((_, ref) => {
         </p>
       </Link>
       <div className="flex items-center gap-4">
-        <Input
-          ref={ref}
-          placeholder="Search Products"
-          className="h-12 md:w-sm w-45 md:flex"
-        />
+        {location.pathname == "/" && (
+          <Input
+            ref={ref}
+            placeholder="Search Products"
+            className="h-12 w-sm"
+          />
+        )}
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger>
             <Button

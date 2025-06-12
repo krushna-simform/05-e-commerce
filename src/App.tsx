@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
 import type { SupabaseSession } from "@/types/supabase.type";
 import { supabase } from "@/supabase-client";
+import { SortProvider } from "@/context/SortContext";
 import SignIn from "@/auth/pages/SignIn";
 import SignUp from "@/auth/pages/SignUp";
 import PrivateRoute from "@/auth/components/PrivateRoute";
@@ -53,7 +54,11 @@ function App() {
     { path: "*", element: <PageNotFound /> },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <SortProvider>
+      <RouterProvider router={router} />
+    </SortProvider>
+  );
 }
 
 export default App;

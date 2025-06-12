@@ -1,3 +1,4 @@
+import { forwardRef, useEffect, useState } from "react";
 import { Link } from "react-router";
 import clickCartIcon from "/icons/logo.png";
 
@@ -6,14 +7,13 @@ import { supabase } from "@/supabase-client";
 import { Input } from "@/components/ui/input";
 import { User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export const Header = () => {
+export const Header = forwardRef<HTMLInputElement>((_, ref) => {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState<SupabaseUser>(null);
 
@@ -31,18 +31,25 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className="flex justify-between items-center px-6 py-2 shadow">
+    <header className="flex justify-between items-center px-6 py-2 shadow bg-white w-full fixed z-10 top-0 left-0">
       <Link to="/" className="flex items-center gap-2">
         <img src={clickCartIcon} alt="ClickCart" className="h-13" />{" "}
-        <p className="text-4xl font-medium bg-gradient-to-r from-[#0792dd] to-indigo-600 bg-clip-text text-transparent">
+        <p className="text-4xl font-medium bg-gradient-to-r from-[#0792dd] to-indigo-600 bg-clip-text text-transparent md:flex hidden">
           ClickCart
         </p>
       </Link>
       <div className="flex items-center gap-4">
-        <Input placeholder="Search Products" className="h-12 w-sm" />
+        <Input
+          ref={ref}
+          placeholder="Search Products"
+          className="h-12 md:w-sm w-45 md:flex"
+        />
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger>
-            <Button className="rounded-full h-11 w-11 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 cursor-pointer">
+            <Button
+              className="rounded-full h-11 w-11 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 cursor-pointer"
+              aria-label="User"
+            >
               <User className="text-white !h-5 !w-5" />
             </Button>
           </PopoverTrigger>
@@ -63,4 +70,4 @@ export const Header = () => {
       </div>
     </header>
   );
-};
+});

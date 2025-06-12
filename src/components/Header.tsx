@@ -13,7 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export const Header = forwardRef<HTMLInputElement>((props, ref) => {
+export const Header = forwardRef<HTMLInputElement>((_, ref) => {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState<SupabaseUser>(null);
 

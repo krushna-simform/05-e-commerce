@@ -10,15 +10,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import type { SortOption } from "@/types/sort.type";
+import { SortOption } from "@/types/sort.type";
 import { cn } from "@/lib/utils";
 
 const sortOptionLabels: Record<string, string> = {
-  none: "No Sorting",
-  "name-asc": "Name: A to Z",
-  "name-desc": "Name: Z to A",
-  "price-asc": "Price: Low to High",
-  "price-desc": "Price: High to Low",
+  [SortOption.None]: "No Sorting",
+  [SortOption.NameAsc]: "Name: A to Z",
+  [SortOption.NameDesc]: "Name: Z to A",
+  [SortOption.PriceAsc]: "Price: Low to High",
+  [SortOption.PriceDesc]: "Price: High to Low",
 };
 
 export const Sidebar = () => {

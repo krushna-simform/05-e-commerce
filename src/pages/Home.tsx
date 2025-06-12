@@ -32,11 +32,17 @@ const Home = () => {
     }
   }, [finalProducts, sortOption]);
 
-  const isLoading = isLoadingDefault;
+  if (isLoadingDefault) {
+    return (
+      <div className="min-h-[80vh]">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-[80vh]">
-      {isLoading ? <Loader /> : <Products product={sortedProducts} />}
+      <Products product={sortedProducts} />
     </div>
   );
 };

@@ -12,6 +12,7 @@ import Home from "@/pages/Home";
 import PageNotFound from "@/pages/NotFound";
 import Product from "@/pages/Product";
 import { SearchProvider } from "./context/SearchContext";
+import { ErrorBoundary } from "./components/ErrorBoundry";
 
 function App() {
   const [session, setSession] = useState<SupabaseSession>(null);
@@ -43,7 +44,9 @@ function App() {
       path: "/",
       element: (
         <PrivateRoute session={session} loading={loading}>
-          <Layout />
+          <ErrorBoundary>
+            <Layout />
+          </ErrorBoundary>
         </PrivateRoute>
       ),
       children: [
@@ -53,11 +56,23 @@ function App() {
     },
     {
       path: "/sign-in",
-      element: !session ? <SignIn /> : <Navigate to="/" />,
+      element: !session ? (
+        <ErrorBoundary>
+          <SignIn />
+        </ErrorBoundary>
+      ) : (
+        <Navigate to="/" />
+      ),
     },
     {
       path: "/sign-up",
-      element: !session ? <SignUp /> : <Navigate to="/" />,
+      element: !session ? (
+        <ErrorBoundary>
+          <SignUp />
+        </ErrorBoundary>
+      ) : (
+        <Navigate to="/" />
+      ),
     },
     { path: "*", element: <PageNotFound /> },
   ]);

@@ -1,5 +1,6 @@
 import { useLocation } from "react-router";
 import { Button } from "@/components/ui/button";
+import { ErrorTest } from "@/components/ErrorTest";
 import sampleQR from "/icons/qr.svg";
 import googlePlayLogo from "/icons/google_play.svg";
 import appStoreLogo from "/icons/app_store.svg";
@@ -30,6 +31,7 @@ export function Footer({ focusOnSearch }: FooterProp) {
               Focus on search
             </Button>
           )}
+          <ErrorTest />
           <div className="flex flex-col gap-4">
             <p>Subscribe</p>
             <p>Get 10% off your first order</p>

@@ -1,9 +1,9 @@
+import { useEffect } from "react";
 import type { Product } from "@/types/product.type";
+import { useSort } from "@/hooks/useSort";
+import { useSearch } from "@/hooks/useSearch";
 import { ProductCard } from "@/components/ProductCard";
 import { Sidebar } from "@/components/Sidebar";
-import { useSort } from "@/hooks/useSort";
-import { useEffect } from "react";
-import { useSearch } from "@/hooks/useSearch";
 
 export const Products = ({ product }: { product: Array<Product> }) => {
   const { sortOption } = useSort();

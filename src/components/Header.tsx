@@ -34,14 +34,14 @@ export const Header = () => {
     <header className="flex justify-between items-center px-6 py-2 shadow bg-white w-full fixed z-10 top-0 left-0">
       <Link to="/" className="flex items-center gap-2">
         <img src={clickCartIcon} alt="ClickCart" className="h-13" />{" "}
-        <p className="text-4xl font-medium bg-gradient-to-r from-[#0792dd] to-indigo-600 bg-clip-text text-transparent">
+        <p className="text-4xl font-medium bg-gradient-to-r from-[#0792dd] to-indigo-600 bg-clip-text text-transparent md-flex hidden">
           ClickCart
         </p>
       </Link>
       <div className="flex items-center gap-4">
         <Input
           placeholder="Search Products"
-          className="h-12 w-sm hidden md:flex"
+          className="h-12 md:w-sm w-45 md:flex"
         />
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger>

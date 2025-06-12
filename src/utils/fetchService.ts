@@ -1,6 +1,6 @@
-import type { ProductResponse } from "@/types/product.type";
+import type { Product, ProductResponse } from "@/types/product.type";
 
-export const fetchProducts = async (): Promise<ProductResponse> => {
+const fetchProducts = async (): Promise<ProductResponse> => {
   try {
     const res = await fetch("https://dummyjson.com/products?skip=25&limit=150");
 
@@ -16,3 +16,22 @@ export const fetchProducts = async (): Promise<ProductResponse> => {
     throw new Error("Error occurred while fetching the Products.");
   }
 };
+
+const fetchProductDetails = async (
+  productId: string | number
+): Promise<Product> => {
+  try {
+    const res = await fetch(`https://dummyjson.com/products/${productId}`);
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch product");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error("Error fetching product details:", error);
+    throw error;
+  }
+};
+
+export { fetchProducts, fetchProductDetails };

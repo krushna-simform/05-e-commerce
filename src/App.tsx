@@ -11,6 +11,7 @@ import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
 import PageNotFound from "@/pages/NotFound";
 import Product from "@/pages/Product";
+import { SearchProvider } from "./context/SearchContext";
 
 function App() {
   const [session, setSession] = useState<SupabaseSession>(null);
@@ -63,7 +64,9 @@ function App() {
 
   return (
     <SortProvider>
-      <RouterProvider router={router} />
+      <SearchProvider>
+        <RouterProvider router={router} />
+      </SearchProvider>
     </SortProvider>
   );
 }

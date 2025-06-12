@@ -10,6 +10,7 @@ import PrivateRoute from "@/auth/components/PrivateRoute";
 import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
 import PageNotFound from "@/pages/NotFound";
+import Product from "@/pages/Product";
 
 function App() {
   const [session, setSession] = useState<SupabaseSession>(null);
@@ -41,7 +42,10 @@ function App() {
           <Layout />
         </PrivateRoute>
       ),
-      children: [{ index: true, element: <Home /> }],
+      children: [
+        { index: true, element: <Home /> },
+        { path: "/product/:productId", element: <Product /> },
+      ],
     },
     {
       path: "/sign-in",

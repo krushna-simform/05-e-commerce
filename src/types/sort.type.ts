@@ -1,6 +1,7 @@
-export type SortOption =
-  | "name-asc"
-  | "name-desc"
-  | "price-asc"
-  | "price-desc"
-  | "none";
+export enum SortOption {
+  NameAsc = "name-asc",
+  NameDesc = "name-desc",
+  PriceAsc = "price-asc",
+  PriceDesc = "price-desc",
+  None = "none",
+}

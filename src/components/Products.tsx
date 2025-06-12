@@ -1,8 +1,16 @@
 import type { Product } from "@/types/product.type";
 import { ProductCard } from "@/components/ProductCard";
 import { Sidebar } from "@/components/Sidebar";
+import { useSort } from "@/hooks/useSort";
+import { useEffect } from "react";
 
 export const Products = ({ product }: { product: Array<Product> }) => {
+  const { sortOption } = useSort();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [sortOption]);
+
   return (
     <div className="flex">
       <Sidebar />

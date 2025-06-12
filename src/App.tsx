@@ -14,11 +14,13 @@ import Product from "@/pages/Product";
 
 function App() {
   const [session, setSession] = useState<SupabaseSession>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchSession = async () => {
       const { data } = await supabase.auth.getSession();
       setSession(data.session);
+      setLoading(false);
     };
 
     fetchSession();
@@ -26,6 +28,7 @@ function App() {
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setSession(session);
+        setLoading(false);
       }
     );
 
@@ -38,7 +41,7 @@ function App() {
     {
       path: "/",
       element: (
-        <PrivateRoute session={session}>
+        <PrivateRoute session={session} loading={loading}>
           <Layout />
         </PrivateRoute>
       ),

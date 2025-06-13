@@ -55,7 +55,7 @@ export const Sidebar = () => {
             <IoClose />
           </button>
           <h2 className="text-lg font-semibold mb-4 text-center">Sort By</h2>
-          <DropdownMenu>
+          <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="cursor-pointer">
                 {sortOptionLabels[sortOption] ?? "Select Sorting"}

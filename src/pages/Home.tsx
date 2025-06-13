@@ -5,15 +5,24 @@ import { useFetchProducts } from "@/hooks/useFetchProducts";
 import { useSort } from "@/hooks/useSort";
 import { Loader } from "@/components/ui/Loader";
 import { SortOption } from "@/types/sort.type";
+import { useSearch } from "@/hooks/useSearch";
 
 const Home = () => {
   const { sortOption } = useSort();
+  const { searchTerm } = useSearch();
 
   const { data: defaultData, isLoading: isLoadingDefault } = useFetchProducts();
 
   const finalProducts = useMemo(() => {
+    if (searchTerm.trim()) {
+      return (
+        defaultData?.products.filter((product) =>
+          product.title.toLowerCase().includes(searchTerm.toLowerCase())
+        ) || []
+      );
+    }
     return defaultData?.products || [];
-  }, [defaultData]);
+  }, [defaultData, searchTerm]);
 
   const sortedProducts = useMemo(() => {
     const products = [...finalProducts];

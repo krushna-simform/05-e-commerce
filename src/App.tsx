@@ -10,14 +10,19 @@ import PrivateRoute from "@/auth/components/PrivateRoute";
 import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
 import PageNotFound from "@/pages/NotFound";
+import Product from "@/pages/Product";
+import { SearchProvider } from "@/context/SearchContext";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 function App() {
   const [session, setSession] = useState<SupabaseSession>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchSession = async () => {
       const { data } = await supabase.auth.getSession();
       setSession(data.session);
+      setLoading(false);
     };
 
     fetchSession();
@@ -25,6 +30,7 @@ function App() {
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setSession(session);
+        setLoading(false);
       }
     );
 
@@ -37,26 +43,45 @@ function App() {
     {
       path: "/",
       element: (
-        <PrivateRoute session={session}>
-          <Layout />
+        <PrivateRoute session={session} loading={loading}>
+          <ErrorBoundary>
+            <Layout />
+          </ErrorBoundary>
         </PrivateRoute>
       ),
-      children: [{ index: true, element: <Home /> }],
+      children: [
+        { index: true, element: <Home /> },
+        { path: "/product/:productId", element: <Product /> },
+      ],
     },
     {
       path: "/sign-in",
-      element: !session ? <SignIn /> : <Navigate to="/" />,
+      element: !session ? (
+        <ErrorBoundary>
+          <SignIn />
+        </ErrorBoundary>
+      ) : (
+        <Navigate to="/" />
+      ),
     },
     {
       path: "/sign-up",
-      element: !session ? <SignUp /> : <Navigate to="/" />,
+      element: !session ? (
+        <ErrorBoundary>
+          <SignUp />
+        </ErrorBoundary>
+      ) : (
+        <Navigate to="/" />
+      ),
     },
     { path: "*", element: <PageNotFound /> },
   ]);
 
   return (
     <SortProvider>
-      <RouterProvider router={router} />
+      <SearchProvider>
+        <RouterProvider router={router} />
+      </SearchProvider>
     </SortProvider>
   );
 }

@@ -1,13 +1,13 @@
 import { forwardRef, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
 import clickCartIcon from "/icons/logo.png";
+import { User } from "lucide-react";
 
-import type { SupabaseUser } from "@/types/supabase.type";
-import { supabase } from "@/supabase-client";
 import { useSearch } from "@/hooks/useSearch";
 import { useDebounce } from "@/hooks/useDebounce";
+import { useSession } from "@/hooks/useSession";
 import { Input } from "@/components/ui/input";
-import { User } from "lucide-react";
+import { clearTokens } from "@/utils/localStorageService";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -17,8 +17,8 @@ import {
 
 export const Header = forwardRef<HTMLInputElement>((_, ref) => {
   const [open, setOpen] = useState(false);
-  const [userData, setUserData] = useState<SupabaseUser>(null);
   const location = useLocation();
+  const { setSession } = useSession();
 
   const { setSearchTerm } = useSearch();
   const [input, setInput] = useState("");
@@ -27,19 +27,6 @@ export const Header = forwardRef<HTMLInputElement>((_, ref) => {
   useEffect(() => {
     setSearchTerm(debouncedValue);
   }, [debouncedValue, setSearchTerm]);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const { data } = await supabase.auth.getUser();
-        setUserData(data.user);
-      } catch (error) {
-        alert("Something went wrong");
-        console.error(error);
-      }
-    };
-    fetchUser();
-  }, []);
 
   return (
     <header className="flex justify-between items-center px-6 py-2 shadow bg-white w-full fixed z-10 top-0 left-0">
@@ -68,14 +55,12 @@ export const Header = forwardRef<HTMLInputElement>((_, ref) => {
               <User className="text-white !h-5 !w-5" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="min-w-sm border-none flex flex-col items-center gap-2 mt-6">
-            <p className="bg-gray-100 py-2 px-4 font-medium text-center rounded-sm">
-              {userData?.email}
-            </p>
+          <PopoverContent className="border-none flex flex-col items-center gap-2 mt-6">
             <Button
               className="w-20 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white cursor-pointer"
               onClick={() => {
-                supabase.auth.signOut();
+                clearTokens();
+                setSession(null);
               }}
             >
               Logout

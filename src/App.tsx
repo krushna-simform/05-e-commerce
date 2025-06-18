@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
-import type { SupabaseSession } from "@/types/supabase.type";
-import { supabase } from "@/supabase-client";
-import { SortProvider } from "@/context/SortContext";
 import SignIn from "@/auth/pages/SignIn";
 import SignUp from "@/auth/pages/SignUp";
 import PrivateRoute from "@/auth/components/PrivateRoute";
@@ -11,33 +8,24 @@ import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
 import PageNotFound from "@/pages/NotFound";
 import Product from "@/pages/Product";
+import { SortProvider } from "@/context/SortContext";
 import { SearchProvider } from "@/context/SearchContext";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { checkAuth } from "@/utils/authValidation";
+import { useSession } from "@/hooks/useSession";
 
 function App() {
-  const [session, setSession] = useState<SupabaseSession>(null);
   const [loading, setLoading] = useState(true);
+  const { session, setSession } = useSession();
 
   useEffect(() => {
-    const fetchSession = async () => {
-      const { data } = await supabase.auth.getSession();
-      setSession(data.session);
+    async function validate() {
+      const token = await checkAuth();
+      setSession(token);
       setLoading(false);
-    };
-
-    fetchSession();
-
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setSession(session);
-        setLoading(false);
-      }
-    );
-
-    return () => {
-      listener.subscription.unsubscribe();
-    };
-  }, []);
+    }
+    validate();
+  }, [setSession]);
 
   const router = createBrowserRouter([
     {

@@ -1,6 +1,6 @@
 import type { SignupSignupResponse, AuthTokens } from "@/types/auth.type";
 import type { User } from "@/types/user.type";
-import { storeTokens } from "./localStorageService";
+import { storeTokens } from "@/utils/localStorageService";
 
 export async function signUpUser(
   newUser: Omit<User, "age" | "gender" | "confirmPassword">

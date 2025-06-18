@@ -2,9 +2,9 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { SessionProvider } from "@/context/SessionContext";
 import App from "@/App.tsx";
 import "@/index.css";
-import { SessionProvider } from "./context/SessionContext";
 
 const queryClient = new QueryClient();
 

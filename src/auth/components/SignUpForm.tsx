@@ -30,11 +30,13 @@ export const SignUpForm = () => {
 
   const { mutate: signUpUser, isPending } = useSignupUser();
 
-  const formik = useFormik<Omit<User, "age" | "gender">>({
+  const formik = useFormik<User>({
     initialValues: {
       firstName: "",
       lastName: "",
       email: "",
+      age: 0,
+      gender: "male",
       contactNumber: "",
       password: "",
       confirmPassword: "",
@@ -47,6 +49,8 @@ export const SignUpForm = () => {
         firstName: values.firstName.trim(),
         lastName: values.lastName.trim(),
         email: values.email.trim(),
+        age: values.age,
+        gender: values.gender,
         contactNumber: String(values.contactNumber),
         password: values.password,
       };
@@ -190,7 +194,13 @@ export const SignUpForm = () => {
                 id="age"
                 className="h-10"
                 type="number"
+                value={formik.values.age}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+              {formik.touched.age && formik.errors.age && (
+                <p className="text-red-600 text-sm">{formik.errors.age}</p>
+              )}
             </div>
             <div className="space-y-3 w-full">
               <Label htmlFor="gender" className="text-gray-700">
@@ -198,6 +208,7 @@ export const SignUpForm = () => {
               </Label>
               <Select
                 name="gender"
+                value={formik.values.gender}
                 onValueChange={(value) =>
                   formik.setFieldValue("gender", value as Gender)
                 }
@@ -211,6 +222,9 @@ export const SignUpForm = () => {
                   <SelectItem value="other">Other</SelectItem>
                 </SelectContent>
               </Select>
+              {formik.touched.gender && formik.errors.gender && (
+                <p className="text-red-600 text-sm">{formik.errors.gender}</p>
+              )}
             </div>
           </div>
 

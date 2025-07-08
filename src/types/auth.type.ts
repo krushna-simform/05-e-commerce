@@ -40,7 +40,7 @@ interface AuthTokens {
   refreshToken: string;
 }
 
-type SignupSignupResponse =
+type SignupSigninResponse =
   | SignupSigninResponseSuccess
   | SignupSignupResponseError;
 
@@ -49,6 +49,6 @@ export type {
   UserData,
   SignupSigninResponseSuccess,
   SignupSignupResponseError,
-  SignupSignupResponse,
+  SignupSigninResponse,
   AuthTokens,
 };

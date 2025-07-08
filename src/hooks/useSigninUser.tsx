@@ -4,7 +4,7 @@ import { signInUser } from "@/utils/auth";
 import { checkAuth } from "@/utils/authValidation";
 import { useSession } from "@/hooks/useSession";
 import type {
-  SignupSignupResponse,
+  SignupSigninResponse,
   SignupSignupResponseError,
 } from "@/types/auth.type";
 
@@ -14,7 +14,7 @@ export const useSigninUser = () => {
 
   return useMutation({
     mutationFn: signInUser,
-    onSuccess: async (data: SignupSignupResponse) => {
+    onSuccess: async (data: SignupSigninResponse) => {
       if (data.status === "success") {
         const session = await checkAuth();
         setSession(session);

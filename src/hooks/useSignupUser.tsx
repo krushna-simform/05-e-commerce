@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { signUpUser } from "@/utils/auth";
 import type {
-  SignupSignupResponse,
+  SignupSigninResponse,
   SignupSignupResponseError,
 } from "@/types/auth.type";
 import { useNavigate } from "react-router";
@@ -10,7 +10,7 @@ export const useSignupUser = () => {
   const navigate = useNavigate();
   return useMutation({
     mutationFn: signUpUser,
-    onSuccess: (data: SignupSignupResponse) => {
+    onSuccess: (data: SignupSigninResponse) => {
       if (data.status === "success") {
         alert("Account created successfully");
         navigate("/sign-in");

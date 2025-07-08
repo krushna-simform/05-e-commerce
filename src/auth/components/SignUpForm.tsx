@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { CalendarIcon } from "lucide-react";
 import { useFormik } from "formik";
 import { format } from "date-fns";
 
 import type { Gender, User } from "@/types/user.type";
-import { supabase } from "@/supabase-client";
 import { AddUserSchema } from "@/auth/utils/validations";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,11 +22,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import { useSignupUser } from "@/hooks/useSignupUser";
 
 export const SignUpForm = () => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(undefined);
-  const navigate = useNavigate();
+
+  const { mutate: signUpUser, isPending } = useSignupUser();
 
   const formik = useFormik<User>({
     initialValues: {
@@ -43,33 +44,41 @@ export const SignUpForm = () => {
     validationSchema: AddUserSchema,
     validateOnChange: true,
     validateOnBlur: true,
-    onSubmit: async (values) => {
-      const newUser: Omit<User, "confirmPassword"> = {
+    onSubmit: (values) => {
+      const newUser = {
         firstName: values.firstName.trim(),
         lastName: values.lastName.trim(),
         email: values.email.trim(),
         age: values.age,
         gender: values.gender,
-        contactNumber: values.contactNumber,
+        contactNumber: String(values.contactNumber),
         password: values.password,
       };
 
-      try {
-        const { error } = await supabase.auth.signUp(newUser);
-
-        if (error) {
-          alert("An error occurred during signup. Please try again.");
-        } else {
-          alert("Account created successfully!");
-          await supabase.auth.signOut();
-          navigate("/sign-in");
-        }
-      } catch (error) {
-        alert("An error occurred during signup. Please try again.");
-        console.error(error);
-      }
+      signUpUser(newUser);
     },
   });
+
+  if (isPending) {
+    return (
+      <div className="flex flex-col items-center min-h-[80vh] justify-center">
+        <div className="mb-8 relative">
+          <div
+            className="w-10 h-10 border-4 border-t-[#] border-r-[#0792dd]/30 border-b-[#0792dd]/10 border-l-[#0792dd]/70 rounded-full animate-spin relative z-10"
+            role="status"
+            aria-label="Loading"
+          />
+          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-14 h-4 bg-gradient-to-t from-transparent to-[rgba(219,68,68,0.1)] blur-sm"></div>
+        </div>
+        <p className="text-xl text-gray-600 mt-4 font-medium">
+          Creating account for you...
+        </p>
+        <p className="text-sm text-gray-500 mt-2">
+          Please wait while we are creating account for you...
+        </p>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -177,7 +186,7 @@ export const SignUpForm = () => {
           <div className="flex gap-3">
             <div className="space-y-3 w-full">
               <Label htmlFor="age" className="text-gray-700">
-                Age <span className="text-red-700">*</span>
+                Age
               </Label>
               <Input
                 name="age"
@@ -195,7 +204,7 @@ export const SignUpForm = () => {
             </div>
             <div className="space-y-3 w-full">
               <Label htmlFor="gender" className="text-gray-700">
-                Gender <span className="text-red-700">*</span>
+                Gender
               </Label>
               <Select
                 name="gender"

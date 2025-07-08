@@ -16,9 +16,8 @@ const AddUserSchema = Yup.object({
   age: Yup.number()
     .typeError("Age must be a number")
     .min(1, "Age must be at least 1")
-    .max(100, "Age must be lest then 100")
-    .required("Age is required"),
-  gender: Yup.string().required("Gender is required"),
+    .max(100, "Age must be lest then 100"),
+  gender: Yup.string(),
   contactNumber: Yup.string()
     .required("Contact Number is required")
     .matches(/^[6-9]\d{9}$/, "Enter a valid 10-digit Indian contact number"),

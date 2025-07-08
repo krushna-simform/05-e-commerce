@@ -1,5 +1,4 @@
 import { Navigate } from "react-router";
-import type { SupabaseSession } from "@/types/supabase.type";
 import { Loader } from "@/components/ui/Loader";
 
 const PrivateRoute = ({
@@ -7,7 +6,7 @@ const PrivateRoute = ({
   loading,
   children,
 }: {
-  session: SupabaseSession;
+  session: string | null;
   loading: boolean;
   children: React.ReactNode;
 }) => {
